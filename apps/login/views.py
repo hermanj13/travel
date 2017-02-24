@@ -42,7 +42,6 @@ def login(request):
                 'password':request.POST['password']
             }
             flag = User.objects.loginvalidate(validate,request)
-            print flag
             if flag == True:
                 return redirect(reverse('login:index'))
             if flag == False:

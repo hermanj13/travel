@@ -33,7 +33,15 @@
         <th>Travel End Date</th>
         <th>Plan</th>
       </tr>
-      {% for trip in trips %}
+      {% for trip in trips_made %}
+      <tr>
+        <th><a href="{% url 'travel:dest' id=trip.id %}">{{trip.destination}}</a></th>
+        <th>{{trip.start}}</th>
+        <th>{{trip.end}}</th>
+        <th>{{trip.description}}</th>
+      </tr>
+      {% endfor %}
+      {% for trip in trips_join %}
       <tr>
         <th><a href="{% url 'travel:dest' id=trip.id %}">{{trip.destination}}</a></th>
         <th>{{trip.start}}</th>

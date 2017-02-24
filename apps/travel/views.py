@@ -10,7 +10,8 @@ def index(request):
         return redirect(reverse('login:index'))
     else:
         context = {
-            'trips' : Trips.objects.filter(creater__id = request.session['id'])|Trips.objects.filter(travelers_trip__booked__id = request.session['id']),
+            'trips_made' : Trips.objects.filter(creater__id = request.session['id']),
+            'trips_join' : Trips.objects.filter(travelers_trip__booked__id = request.session['id']),
             'others' : Trips.objects.exclude(creater__id = request.session['id'])&Trips.objects.exclude(travelers_trip__booked__id = request.session['id'])
         }
         return render(request, 'travel/index.html', context)
@@ -45,7 +46,6 @@ def new(request):
                 'end' : request.POST['end']
             }
             flag = Trips.objects.validate(validate,request)
-            print flag
             if flag == True:
                 return redirect(reverse('travel:add'))
             if flag == False:
